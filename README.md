@@ -1,4 +1,2 @@
-#################
 
-
-# This repo has basic learning of Terraform Infrastructure
+**This repo has basic learning of Terraform Infrastructure**
