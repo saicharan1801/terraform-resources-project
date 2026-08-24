@@ -10,7 +10,12 @@ terraform {
       version = "~> 3.0"
     }
   }
-
+  backend "s3" {
+    bucket = "charan-new-bucket-18"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
+    use_lockfile = true
+  }
 }
 
 provider "aws" {

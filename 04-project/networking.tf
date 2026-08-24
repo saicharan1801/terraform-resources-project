@@ -1,0 +1,45 @@
+resource "aws_vpc" "main" {
+  cidr_block = "10.0.0.0/16"
+
+  tags = {
+    Name      = "main-vpc"
+    ManagedBy = "Terraform"
+    Project   = "04-project"
+  }
+}
+
+resource "aws_subnet" "public" {
+  vpc_id     = aws_vpc.main.id
+  cidr_block = "10.0.0.0/24"
+
+  tags = {
+    Name      = "public-subnet"
+    ManagedBy = "Terraform"
+    Project   = "04-project"
+  }
+}
+
+resource "aws_internet_gateway" "main" {
+  vpc_id = aws_vpc.main.id
+
+  tags = {
+    Name      = "main-igw"
+    ManagedBy = "Terraform"
+    Project   = "04-project"
+  }
+}
+
+resource "aws_route_table" "public" {
+  vpc_id = aws_vpc.main.id
+
+  route {
+    cidr_block = "0.0.0.0/0"
+    gateway_id = aws_internet_gateway.main.id
+  }
+
+  tags = {
+    Name      = "public-route-table"
+    ManagedBy = "Terraform"
+    Project   = "04-project"
+  }
+}
