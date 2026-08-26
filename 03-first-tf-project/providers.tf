@@ -11,9 +11,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "charan-new-bucket-18"
-    key    = "terraform.tfstate"
-    region = "us-east-1"
+    bucket       = "charan-new-bucket-18"
+    key          = "terraform.tfstate"
+    region       = "us-east-1"
     use_lockfile = true
   }
 }
@@ -22,14 +22,3 @@ provider "aws" {
   region = "ap-south-1"
 }
 
-resource "random_id" "bucket_id" {
-  byte_length = 8
-}
-
-resource "aws_s3_bucket" "sai-bucket" {
-  bucket = "sai-bucket-${random_id.bucket_id.hex}"
-}
-
-output "bucket_name" {
-  value = aws_s3_bucket.sai-bucket.bucket
-}
