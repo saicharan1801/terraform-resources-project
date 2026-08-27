@@ -1,0 +1,14 @@
+locals {
+  users_map = { for user_info in var.users : user_info.username => user_info.role... }
+  users_map2 = { for username, roles in local.users_map : username => {
+    roles = roles
+  } }
+}
+
+output "users_map" {
+  value = local.users_map
+}
+
+output "users_map2" {
+  value = local.users_map2
+}
